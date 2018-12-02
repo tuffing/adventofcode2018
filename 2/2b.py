@@ -1,7 +1,7 @@
 import jellyfish
 from collections import deque
 
-print("Advent 2.a")
+print("Advent 2.b")
 
 inputFile = open('input.txt', 'r')
 inputList = inputFile.read().strip().split()
