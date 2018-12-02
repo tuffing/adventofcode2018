@@ -14,14 +14,14 @@ What is the first frequency your device reaches twice? (input loops infinitely)
 
 	there is a native python library called itertools. it's got a number of useful array functions like cycle which could remove the while(true). No specific gain but would reduce line count
 
-#2: https://adventofcode.com/2018/day/2
+##2: https://adventofcode.com/2018/day/2
 ### pt a:
 Of these box IDs, four of them contain a letter which appears exactly twice, and three of them contain a letter which appears exactly three times. Multiplying these together produces a checksum of 4 * 3 = 12.
 
 ### pt b
 find the closest matching sum
 
-### useful tricks i found doing this / read other people do
+### useful tricks I found doing this / read other people do
 discovered the collections library while doing pt b. made use of the deque collection. Very fast queue.
 
 Someone else used the Counter collection for the first part which would of significantly simplied the function.
