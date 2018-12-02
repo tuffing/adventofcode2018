@@ -45,4 +45,4 @@ def findRepeatUsingSets():
 
 print("Using sets instead, exploiting that the set size will not increase if it receives a duplicate\n----")
 t2 = Timer("findRepeatUsingSets()", "from __main__ import findRepeatUsingSets")
-print("Time: %s \n----------------" % t2.timeit(number=1)) # 0.04230022802948952
+print("Time: %s \n----------------" % t2.timeit(number=1)) # 0.03885865292977542
