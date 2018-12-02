@@ -29,3 +29,5 @@ Someone else used the Counter collection for the first part which would of signi
 Loops in python support enumerate, which allows you to get a counter for the current progress through the loop
 
 Occured to me afterwards, rather than use the levenshtein distance an easy way to score it manually would be to loop through each character and for each non match, add one. As the strings are all the same length.
+
+I notice a lots of solutions assume the lowest score will be 1 - which the text never explicitly says. Making this assumption does remove a significant amount of code however
