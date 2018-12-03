@@ -31,3 +31,18 @@ Loops in python support enumerate, which allows you to get a counter for the cur
 Occured to me afterwards, rather than use the levenshtein distance an easy way to score it manually would be to loop through each character and for each non match, add one. As the strings are all the same length.
 
 I notice a lots of solutions assume the lowest score will be 1 - which the text never explicitly says. Making this assumption does remove a significant amount of code however
+
+##3 https://adventofcode.com/2018/day/3
+### pt a
+Find the points on the grid being overlapped
+
+### pt b
+Find the one rectangle that isn't overlapping anything
+
+###neat tricks i found / saw people doing
+A nice simple way to parse the data was this:
+map(lambda s: map(int, re.findall(r'-?\d+', s)), data)
+
+Pretty much exploitng map and all the values we needed were numbers. Clever. I see being able to use this a lot in this challenge
+
+Should play with the map function more often actually..
