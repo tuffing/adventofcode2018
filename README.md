@@ -46,3 +46,5 @@ map(lambda s: map(int, re.findall(r'-?\d+', s)), data)
 Pretty much exploitng map and all the values we needed were numbers. Clever. I see being able to use this a lot in this challenge
 
 Should play with the map function more often actually..
+
+Something a lot of people did was to use a dictionary instead of a 2d array. The key would just a be a string 'x,y'. in terms of time not much lost, theortically a little more efficient
