@@ -1,13 +1,13 @@
 #from datetime import datetime
 import re
-
+import sys
+sys.path.append('../')
+from scaffolding import common
 
 print("Advent 4.a")
 
-inputFile = open('input.txt', 'r')
-inputList = inputFile.read().strip().split('\n')
-inputFile.close()
-
+inputList = common.loadInput('input.txt')
+#numberList = common.pullNumbersFromList(inputList)
 
 def processInput():
 	actions = dict()
@@ -84,7 +84,6 @@ def findTimeGuardIsMostAsleep(guard):
 			mostSleepTime = minute
 			highestCount = count
 
-	print(guard)
 	return mostSleepTime
 
 
