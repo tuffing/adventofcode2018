@@ -61,6 +61,8 @@ This would of been perfect for defaultDict. Would of saved a heap of time findin
 
 Example here would have been to use a counter instead of having to run the findTimesAlseep function
 
+someone suggested this algorithm could be adapted: https://www.geeksforgeeks.org/find-the-point-where-maximum-intervals-overlap/ should check it out and play with it
+
 ##5 https://adventofcode.com/2018/day/5
 ### pt a 
 How many units remain after fully reacting the polymer you scanned? 
