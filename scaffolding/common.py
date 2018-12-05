@@ -1,8 +1,13 @@
 import re
 
-def loadInput(filename):
+def loadInput(filename, splitIntoArray=True):
 	inputFile = open(filename, 'r')
-	return inputFile.read().strip().split('\n')
+	text = inputFile.read().strip()
+	if (splitIntoArray):
+		return text.split('\n')
+
+	return text
+	
 	inputFile.close()
 
 def pullNumbersFromList(data, includeSigns = True):
