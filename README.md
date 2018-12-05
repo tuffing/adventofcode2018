@@ -71,4 +71,5 @@ What is the length of the shortest polymer you can produce by removing all units
 ###neat tricks i found / saw people doing
 First time most solutions were similar to mine. Essentially treating this problem the same way you match parenthesis - using a stack and looping through the text only once. There were some people who used stirng replace over and over but that appears to be significantly slower than this approach 
 
+Also string.ascii_lowercase is a short cut for the alphabet
 
