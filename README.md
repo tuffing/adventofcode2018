@@ -49,7 +49,7 @@ Should play with the map function more often actually..
 
 Something a lot of people did was to use a dictionary instead of a 2d array. The key would just a be a string 'x,y'. in terms of time not much lost, theortically a little more efficient
 
-##3 https://adventofcode.com/2018/day/4
+##4 https://adventofcode.com/2018/day/4
 ### pt a 
 Find the guard that sleeps the most 
 
@@ -60,3 +60,15 @@ Of all guards, which guard is most frequently asleep on the same minute?
 This would of been perfect for defaultDict. Would of saved a heap of time finding the maxes as i could of used either lambdas or Counter with it. To do list for the weekend, go over this library, get it's syntax down pat! I'll no doubt have use for these libraries a lot before the challenge is over. 
 
 Example here would have been to use a counter instead of having to run the findTimesAlseep function
+
+##5 https://adventofcode.com/2018/day/5
+### pt a 
+How many units remain after fully reacting the polymer you scanned? 
+
+###pt b 
+What is the length of the shortest polymer you can produce by removing all units of exactly one type and fully reacting the result?
+
+###neat tricks i found / saw people doing
+First time most solutions were similar to mine. Essentially treating this problem the same way you match parenthesis - using a stack and looping through the text only once. There were some people who used stirng replace over and over but that appears to be significantly slower than this approach 
+
+
