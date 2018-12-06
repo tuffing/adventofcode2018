@@ -2,6 +2,8 @@
 
 https://adventofcode.com/
 
+Faster implementations are marked as optimal.. at least until i find a more optimal solution
+
 ##1: https://adventofcode.com/2018/day/1
 ###pt a:
 Starting with a frequency of zero, what is the resulting frequency after all of the changes in frequency have been applied?
@@ -45,8 +47,6 @@ map(lambda s: map(int, re.findall(r'-?\d+', s)), data)
 
 Pretty much exploitng map and all the values we needed were numbers. Clever. I see being able to use this a lot in this challenge
 
-Should play with the map function more often actually..
-
 Something a lot of people did was to use a dictionary instead of a 2d array. The key would just a be a string 'x,y'. in terms of time not much lost, theortically a little more efficient
 
 ##4 https://adventofcode.com/2018/day/4
@@ -57,7 +57,7 @@ Find the guard that sleeps the most
 Of all guards, which guard is most frequently asleep on the same minute?
 
 ###neat tricks i found / saw people doing
-This would of been perfect for defaultDict. Would of saved a heap of time finding the maxes as i could of used either lambdas or Counter with it. To do list for the weekend, go over this library, get it's syntax down pat! I'll no doubt have use for these libraries a lot before the challenge is over. 
+This would of been perfect for defaultDict. Would of saved a heap of time finding the maxes as i could of used either lambdas or Counter with it.  
 
 Example here would have been to use a counter instead of having to run the findTimesAlseep function
 
