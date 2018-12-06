@@ -5,13 +5,13 @@ https://adventofcode.com/
 Faster implementations are marked as optimal.. at least until i find a more optimal solution
 
 
-##1: https://adventofcode.com/2018/day/1
+## 1: https://adventofcode.com/2018/day/1
 
-###pt a:
+### pt a:
 
 Starting with a frequency of zero, what is the resulting frequency after all of the changes in frequency have been applied?
 
-###pt b:
+### pt b:
 
 What is the first frequency your device reaches twice? (input loops infinitely)
 
@@ -19,7 +19,7 @@ What is the first frequency your device reaches twice? (input loops infinitely)
 print(sum(map(int, lines))) #one liner (excluding lines import) for the first part
 There is a native python library called itertools. it's got a number of useful array functions like cycle which could remove the while(true). No specific gain but would reduce line count
 
-##2: https://adventofcode.com/2018/day/2
+## 2: https://adventofcode.com/2018/day/2
 
 ### pt a:
 Of these box IDs, four of them contain a letter which appears exactly twice, and three of them contain a letter which appears exactly three times. Multiplying these together produces a checksum of 4 * 3 = 12.
@@ -38,7 +38,7 @@ Occured to me afterwards, rather than use the levenshtein distance an easy way t
 
 I notice a lots of solutions assume the lowest score will be 1 - which the text never explicitly says. Making this assumption does remove a significant amount of code however
 
-##3 https://adventofcode.com/2018/day/3
+## 3 https://adventofcode.com/2018/day/3
 
 ### pt a
 
@@ -48,7 +48,7 @@ Find the points on the grid being overlapped
 
 Find the one rectangle that isn't overlapping anything
 
-###neat tricks i found / saw people doing
+### neat tricks i found / saw people doing
 
 A nice simple way to parse the data was this:
 map(lambda s: map(int, re.findall(r'-?\d+', s)), data)
@@ -57,17 +57,17 @@ Pretty much exploitng map and all the values we needed were numbers. Clever. I s
 
 Something a lot of people did was to use a dictionary instead of a 2d array. The key would just a be a string 'x,y'. in terms of time not much lost, theortically a little more efficient
 
-##4 https://adventofcode.com/2018/day/4
+## 4 https://adventofcode.com/2018/day/4
 
 ### pt a 
 
 Find the guard that sleeps the most 
 
-###pt b 
+### pt b 
 
 Of all guards, which guard is most frequently asleep on the same minute?
 
-###neat tricks i found / saw people doing
+### neat tricks i found / saw people doing
 
 This would of been perfect for defaultDict. Would of saved a heap of time finding the maxes as i could of used either lambdas or Counter with it.  
 
@@ -75,17 +75,17 @@ Example here would have been to use a counter instead of having to run the findT
 
 someone suggested this algorithm could be adapted: https://www.geeksforgeeks.org/find-the-point-where-maximum-intervals-overlap/ should check it out and play with it
 
-##5 https://adventofcode.com/2018/day/5
+## 5 https://adventofcode.com/2018/day/5
 
 ### pt a 
 
 How many units remain after fully reacting the polymer you scanned? 
 
-###pt b 
+### pt b 
 
 What is the length of the shortest polymer you can produce by removing all units of exactly one type and fully reacting the result?
 
-###neat tricks i found / saw people doing
+### neat tricks i found / saw people doing
 
 First time most solutions were similar to mine. Essentially treating this problem the same way you match parenthesis - using a stack and looping through the text only once. There were some people who used stirng replace over and over but that appears to be significantly slower than this approach 
 
