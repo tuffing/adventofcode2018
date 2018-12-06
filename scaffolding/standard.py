@@ -3,7 +3,6 @@
 import sys
 sys.path.append('../')
 from scaffolding import common
-from timeit import Timer
 
 
 class Solution(object):
