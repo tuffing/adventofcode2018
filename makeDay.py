@@ -17,14 +17,14 @@ shutil.copyfile('%s/scaffolding/standard.py' % path, '%s/%s/%sa.py' % (path,dayN
 shutil.copyfile('%s/scaffolding/standard.py' % path, '%s/%s/%sb.py' % (path,dayName,dayName))
 
 #put in the base code that we use on every part
-titleA = "print(\"Advent %sa.\")" % dayName
-with open("%s/%sa.py" % (dayName, dayName), "a") as partA:
-    partA.write(titleA)
-partA.close()
-
-titleB = "print(\"Advent %sb.\")" % dayName
-with open("%s/%sb.py" % (dayName, dayName), "a") as partB:
-    partB.write(titleB)
-partB.close()
+#titleA = "print(\"Advent %sa.\")" % dayName
+#with open("%s/%sa.py" % (dayName, dayName), "a") as partA:
+#    partA.write(titleA)
+#partA.close()
+#
+#titleB = "print(\"Advent %sb.\")" % dayName
+#with open("%s/%sb.py" % (dayName, dayName), "a") as partB:
+#    partB.write(titleB)
+#partB.close()
 
 
