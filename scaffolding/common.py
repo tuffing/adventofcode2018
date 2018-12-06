@@ -15,4 +15,4 @@ def pullNumbersFromList(data, includeSigns = True):
 	if (includeSigns):
 		reg = r'-?\d+'
 
-	return list(map(lambda s: list(map(int, re.findall(reg, s))), data))[0]
+	return list(map(lambda s: list(map(int, re.findall(reg, s))), data))

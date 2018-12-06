@@ -91,3 +91,18 @@ First time most solutions were similar to mine. Essentially treating this proble
 
 Also string.ascii_lowercase is a short cut for the alphabet
 
+## 6 https://adventofcode.com/2018/day/6
+
+### pt a 
+
+Given a bunch of points on a grid, based on the closest points to each area what is the size of the largest area that isn't infinite (it's range doesn't touch the border)? Use Manhattan distance
+
+### pt b 
+
+Find the size of the area in which every spot on the grid is less than 10000 steps away from every point
+
+### neat tricks i found / saw people doing
+
+Had to read up on the Manhattan distance, also known as Taxicab geometry. It's calculated via the equation abs(x1 - x2) + abs(y1 - y2)
+
+
