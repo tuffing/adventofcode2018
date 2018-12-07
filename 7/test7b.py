@@ -10,9 +10,8 @@ from scaffolding import common
 class SolutionTest(unittest.TestCase):
 
 	def test_run(self):
-		#remember to set the assert to the known examples and place the example test into testInput.txt!
-		inputList = common.loadInput('testInput.txt', True) 
-		self.assertEqual(1, Solution.solution(inputList))
+		inputList = common.loadInput('input.txt', True) 
+		self.assertEqual(896, Solution.solution(self, inputList))
 
 
 if __name__ == '__main__':
