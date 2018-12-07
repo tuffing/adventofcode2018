@@ -105,4 +105,5 @@ Find the size of the area in which every spot on the grid is less than 10000 ste
 
 Had to read up on the Manhattan distance, also known as Taxicab geometry. It's calculated via the equation abs(x1 - x2) + abs(y1 - y2)
 
+Investigate solving this with https://en.wikipedia.org/wiki/K-d_tree or using voronoi as an approach https://stackoverflow.com/questions/973094/easiest-algorithm-of-voronoi-diagram-to-implement
 
