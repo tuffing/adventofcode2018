@@ -127,3 +127,4 @@ Same solution used this to grab the next steps. I thought it was a clever one li
 
 ```[s for s in steps if all(b != s for (_, b) in l)]```
 
+
