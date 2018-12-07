@@ -9,11 +9,16 @@ class Solution(object):
 	#inputNumbers = common.pullNumbersFromList(inputList, True) #True = include signs, False: all numbers are positive
 
 	def __init__(self):
-		self.inputList = common.loadInput('input.txt', True) #True = split, False = string
+		pass
+
+	def solution(inputList):
+		print('Solution Here')
+		return 1
 
 	def run():
+		inputList = common.loadInput('input.txt', True) #True = split, False = string
 		print('Advent Day: X')
-		#code to run
+		self.solution(inputList)
 
 
 

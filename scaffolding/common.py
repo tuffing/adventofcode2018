@@ -3,13 +3,13 @@ import re
 def loadInput(filename, splitIntoArray=True):
 	inputFile = open(filename, 'r')
 	text = inputFile.read().strip()
+	inputFile.close()
+
 	if (splitIntoArray):
 		return text.split('\n')
 
 	return text
 	
-	inputFile.close()
-
 def pullNumbersFromList(data, includeSigns = True):
 	reg = r'\d+'
 	if (includeSigns):
