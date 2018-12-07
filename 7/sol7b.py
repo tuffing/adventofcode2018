@@ -15,13 +15,14 @@ class Solution(object):
 	def solution(self, inputList):
 		simplified = list(map(lambda s: s.replace('Step ','').replace(' must be finished before step', '').replace(' can begin.', '').split(' '), inputList))
 
-		letters = set()
+		#test  = 
+		#print(test)
+
+		letters = set([s[0] for s in simplified] + [s[1] for s in simplified])
 		BfollowsA = defaultdict(list)
 		aNeedsB = defaultdict(list)
 
 		for s in simplified:
-			letters.add(s[0])
-			letters.add(s[1])
 			BfollowsA[s[0]].append(s[1])
 			aNeedsB[s[1]].append(s[0])
 
@@ -52,8 +53,7 @@ class Solution(object):
 
 
 		counter = 0
-		while (True):
-			done = True
+		while todo or any(w['currentJob'] is not None for w in workers):
 			for worker in workers:
 				if worker['timeLeft'] > 0:
 					worker['timeLeft'] = worker['timeLeft'] - 1
@@ -92,15 +92,9 @@ class Solution(object):
 						worker['timeLeft'] = ord(nextLetter) - asciiDiff
 						lettersProcessing.add(nextLetter)
 
-				if worker['currentJob'] is not None:
-					done = False
-					
-
 
 			counter = counter + 1
 
-			if len(todo) == 0 and done:
-				break
 
 		return counter
 

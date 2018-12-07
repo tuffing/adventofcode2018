@@ -107,3 +107,23 @@ Had to read up on the Manhattan distance, also known as Taxicab geometry. It's c
 
 Investigate solving this with https://en.wikipedia.org/wiki/K-d_tree or using voronoi as an approach https://stackoverflow.com/questions/973094/easiest-algorithm-of-voronoi-diagram-to-implement
 
+## 7 https://adventofcode.com/2018/day/7
+
+### pt a 
+
+"In what order should the steps in your instructions be completed?" based on a list of steps with requirements with text like "Step K must be finished before step Y can begin."
+
+### pt b 
+
+With 5 workers and the 60+ second step durations described above, how long will it take to complete all of the steps? E.g the first step now takes time but also has multiple processes
+
+### neat tricks i found / saw people doing
+
+Nice way of merging a list of list down into one list
+``` set([s[0] for s in simplified] + [s[1] for s in simplified])
+```
+
+Same solution used this to grab the next steps. I thought it was a clever one liner though in practice id rarely use something like this, i try to keep one liners simpler.
+
+```[s for s in steps if all(b != s for (_, b) in l)]```
+
