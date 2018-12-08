@@ -11,7 +11,7 @@ class Solution(object):
 	def __init__(self):
 		pass
 
-	def solution(inputList):
+	def solution(self, inputList):
 		print('Solution Here')
 		return 1
 

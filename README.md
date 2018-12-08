@@ -128,3 +128,17 @@ Same solution used this to grab the next steps. I thought it was a clever one li
 ```[s for s in steps if all(b != s for (_, b) in l)]```
 
 
+
+## 8 https://adventofcode.com/2018/day/8
+
+### pt a 
+
+Given a string of numbers, use it to build a tree based on some rules and then What is the sum of all metadata entries?
+
+### pt b 
+
+the meta values are now indexes if the current node has children. What is the value of the root node?
+
+### neat tricks i found / saw people doing
+
+Noticed most people used recursion in much the same way i did this time. Saw some very elegant uses of lambdas in sums and pythons list slicing abilities using ':'
