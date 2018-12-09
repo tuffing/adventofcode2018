@@ -142,3 +142,20 @@ the meta values are now indexes if the current node has children. What is the va
 ### neat tricks i found / saw people doing
 
 Noticed most people used recursion in much the same way i did this time. Saw some very elegant uses of lambdas in sums and pythons list slicing abilities using ':'
+
+
+## 9 https://adventofcode.com/2018/day/9
+
+### pt a 
+
+What is the winning Elf's score?
+
+### pt b 
+
+times the number of marbles by 100 and then find the highest score
+
+### neat tricks i found / saw people doing
+
+Come part 2 it was obvious i needed a faster way of doing it so used a linked list. My instinct was that deque was a linked list (which it was) but my bad research showed that i couldn't rotate through it easily. So i implemented my own linked list. Significant speed improvement on part 1 though.
+
+Of course as soon as i look at other peoples solutions the first one is using deque, exactly in the way i guessed it could be used.. grrrr. Should of taken more time to research. Redid 9 ptb again to make use of this knowledge. Halved the time again
