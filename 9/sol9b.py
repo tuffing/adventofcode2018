@@ -7,8 +7,6 @@ from collections import defaultdict, deque
 
 
 class Solution(object):
-	#inputNumbers = common.pullNumbersFromList(inputList, True) #True = include signs, False: all numbers are positive
-
 	def __init__(self):
 		pass
 
@@ -53,13 +51,11 @@ class Solution(object):
 
 			count = count + 1
 
-		#print(players)
 		result = max(players.values())
 		print('Solution Here: %d' % result)
 		return result
 
 	def run(self):
-		#inputList = common.loadInput('input.txt', True) #True = split, False = string
 		print('Advent Day: X')
 		self.solution(430, 71588*100)
 

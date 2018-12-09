@@ -7,7 +7,6 @@ from collections import defaultdict, deque
 
 
 class Solution(object):
-	#inputNumbers = common.pullNumbersFromList(inputList, True) #True = include signs, False: all numbers are positive
 
 	def __init__(self):
 		pass
@@ -38,7 +37,6 @@ class Solution(object):
 		return result
 
 	def run(self):
-		#inputList = common.loadInput('input.txt', True) #True = split, False = string
 		print('Advent Day: X')
 		self.solution(430, 71588*100)
 
