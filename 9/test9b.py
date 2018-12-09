@@ -32,7 +32,7 @@ class SolutionTest(unittest.TestCase):
 
 	def test_run5(self):
 		testObject = Solution()
-		self.assertEqual(37305, testObject.solution(39, 5807))
+		self.assertEqual(37305, testObject.solution(30, 5807))
 
 	def test_run6(self):
 		testObject = Solution()
