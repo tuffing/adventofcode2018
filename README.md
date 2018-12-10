@@ -159,3 +159,17 @@ times the number of marbles by 100 and then find the highest score
 Come part 2 it was obvious i needed a faster way of doing it so used a linked list. My instinct was that deque was a linked list (which it was) but my bad research showed that i couldn't rotate through it easily. So i implemented my own linked list. Significant speed improvement on part 1 though.
 
 Of course as soon as i look at other peoples solutions the first one is using deque, exactly in the way i guessed it could be used.. grrrr. Should of taken more time to research. Redid 9 ptb again to make use of this knowledge. Halved the time again
+
+## 10 https://adventofcode.com/2018/day/10
+
+### pt a 
+
+What is the word that appears when the points come together on the grid
+
+### pt b 
+
+how many seconds did this take
+
+### neat tricks i found / saw people doing
+
+The final solution i made for this solution would only actually work on bigger data sets as long as the veliocity's are pretty high and the word not too long. It actually fails on the HI example. My previous solution was to wait until the difference in width was below a threshold and then wait for user input to progress

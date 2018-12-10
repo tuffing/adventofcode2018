@@ -15,7 +15,7 @@ class Solution(object):
 		print('Solution Here')
 		return 1
 
-	def run():
+	def run(self):
 		inputList = common.loadInput('input.txt', True) #True = split, False = string
 		print('Advent Day: X')
 		self.solution(inputList)
