@@ -172,4 +172,4 @@ how many seconds did this take
 
 ### neat tricks i found / saw people doing
 
-The final solution i made for this solution would only actually work on bigger data sets as long as the veliocity's are pretty high and the word not too long. It actually fails on the HI example. My previous solution was to wait until the difference in width was below a threshold and then wait for user input to progress
+The final solution i made for this solution would only actually work on bigger data sets as long as the veliocity's are pretty high and the word not too long. It actually fails on the HI example. My previous solution was to wait until the difference in width was below a threshold and then wait for user input to progress, a better solution would of actually used the height - as the highest possible character is 10
