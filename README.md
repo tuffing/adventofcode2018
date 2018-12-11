@@ -173,3 +173,18 @@ how many seconds did this take
 ### neat tricks i found / saw people doing
 
 The final solution i made for this solution would only actually work on bigger data sets as long as the veliocity's are pretty high and the word not too long. It actually fails on the HI example. My previous solution was to wait until the difference in width was below a threshold and then wait for user input to progress, a better solution would of actually used the height - as the highest possible character is 10
+
+
+## 11 https://adventofcode.com/2018/day/11
+
+### pt a 
+
+What is the X,Y coordinate of the top-left fuel cell of the 3x3 square with the largest total power?
+
+### pt b 
+
+What is the X,Y,size identifier of the square with the largest total power?
+
+### neat tricks i found / saw people doing
+
+The final solution i made for this solution would only actually work on bigger data sets as long as the veliocity's are pretty high and the word not too long. It actually fails on the HI example. My previous solution was to wait until the difference in width was below a threshold and then wait for user input to progress, a better solution would of actually used the height - as the highest possible character is 10
