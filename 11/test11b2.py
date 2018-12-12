@@ -2,7 +2,7 @@
 
 import unittest
 #replace standard with day name
-from sol11b2 import *
+from sol11b3 import *
 
 sys.path.append('../')
 from scaffolding import common

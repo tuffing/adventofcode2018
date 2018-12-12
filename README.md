@@ -185,6 +185,15 @@ What is the X,Y coordinate of the top-left fuel cell of the 3x3 square with the 
 
 What is the X,Y,size identifier of the square with the largest total power?
 
-### neat tricks i found / saw people doing
+### neat tricks i found / saw people doing / notes
 
-The final solution i made for this solution would only actually work on bigger data sets as long as the veliocity's are pretty high and the word not too long. It actually fails on the HI example. My previous solution was to wait until the difference in width was below a threshold and then wait for user input to progress, a better solution would of actually used the height - as the highest possible character is 10
+The most effiecient solutions I saw in python used scientific libraries like numpy. 
+One of my challenges is to solve these with out 3rd party plugins. 
+
+Solb2 was extremely inefficient as it did 0 partial sums. So in solb2 I tried using the sum of the previous size and adding to it.
+This speed things up but it's still pretty bad ~5 minutes or so. 
+
+Solb3, i realised that as long as the size of the grid isn't a prime, i can build the total from all the smaller sizes that came before it.
+Prime numbers will still need the solb2 solution but otherwise this gave a substationial improvement. Down to about 55 seconds. 
+I could probably get a tiny little more time by filling in prime numbers with lots of smaller squares, 
+theortically I could half the number of iterations needed to build the prime totals. 

@@ -30,7 +30,7 @@ class Solution(object):
 		k=list(squares.keys())
 		
 		print(squares['5,2'])
-		print(grid[5][1])
+		#print(grid[5][1])
 		#print('%s %s' % (k, v))
 		return k[v.index(max(v))]
 
@@ -38,15 +38,15 @@ class Solution(object):
 
 
 	def checkGrid(self, grid, squares, x, y):
-		if y + 3 > len(grid) - 1 or x + 3 > len(grid) - 1:
+		if y + 25 > len(grid) - 1 or x + 25 > len(grid) - 1:
 			return;
 
 		total = 0
-		for iy in range(y, y+3):
-			for ix in range(x, x+3):
+		for iy in range(y, y+25):
+			for ix in range(x, x+25):
 				#print('%d,%d' % (ix,iy))
-				if x+1==5 and y == 2:
-					print(grid[iy][ix])
+				#if x+1==5 and y == 2:
+				#	print(grid[iy][ix])
 				total += grid[iy][ix]
 
 		squares['%d,%d' % (x+1,y)] = total
