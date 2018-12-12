@@ -199,3 +199,21 @@ I could probably get a tiny little more time by filling in prime numbers with lo
 theortically I could half the number of iterations needed to build the prime totals. 
 
 Solution 4 should use this: https://en.wikipedia.org/wiki/Summed-area_table Word has it that this is a substationally fast algoritm to work this out. 
+
+## 12 https://adventofcode.com/2018/day/12
+
+### pt a 
+
+Given some plants in a row and some rules, After 20 generations, what is the sum of the numbers of all pots which contain a plant?
+
+### pt b 
+
+Repeat for 50000000000 generations
+
+### neat tricks i found / saw people doing / notes
+
+Another one where many of the solutions are common. main difference was how the end ranges were managed. Mix of appending 2 dots or 4 etc. 
+
+Attempted to come up with a more effiecient solution to calculate this, but the timing worked out the same to my original attempt. 
+After much too long i decided to review the states for the first 1000 rows. Turns out there's a pattern. Once i did this i just needed to 
+look until the pattern was hit and from there we can just calculate the score using math. Turns out this is what most others did too
