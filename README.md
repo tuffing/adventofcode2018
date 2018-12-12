@@ -197,3 +197,5 @@ Solb3, i realised that as long as the size of the grid isn't a prime, i can buil
 Prime numbers will still need the solb2 solution but otherwise this gave a substationial improvement. Down to about 55 seconds. 
 I could probably get a tiny little more time by filling in prime numbers with lots of smaller squares, 
 theortically I could half the number of iterations needed to build the prime totals. 
+
+Solution 4 should use this: https://en.wikipedia.org/wiki/Summed-area_table Word has it that this is a substationally fast algoritm to work this out. 
