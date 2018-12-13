@@ -217,3 +217,29 @@ Another one where many of the solutions are common. main difference was how the 
 Attempted to come up with a more effiecient solution to calculate this, but the timing worked out the same to my original attempt. 
 After much too long i decided to review the states for the first 1000 rows. Turns out there's a pattern. Once i did this i just needed to 
 look until the pattern was hit and from there we can just calculate the score using math. Turns out this is what most others did too
+
+## 13 https://adventofcode.com/2018/day/13
+
+### pt a 
+
+Find the first collision in a track of carts
+
+### pt b 
+
+If carts are removed of a crash, what is the coords of the last remaining cart
+
+### neat tricks i found / saw people doing / notes
+
+Funnist one yet, I want to turn this into an animation
+
+Many solutions to this, a few used my approach of hard coding the directions. Same reason as me (sanity). A few used vectors which i might also do an implementation with at some point.
+
+Found a very clever solution using math! Complex numbers particlarly. I want to do an implementation using this concept at some point:
+https://www.reddit.com/r/adventofcode/comments/a5qd71/2018_day_13_solutions/ebolyq6/
+
+His explanation:
+>> Really liked this one. I solved it with complex numbers, which is a trick I learned from earlier years. Instead of storing x and y, store position = x + y * i (written y * 1j in python).
+>>
+>> The best part about this is that directions are just one of the numbers +1, +1j, -1, -1j and changing a direction is as simple as multiplying it by either +1j (clockwise turn) or -1j (counterclockwise turn).
+>>
+>> Note that since the Y axis is flipped (positive = down), you flip the imaginary part compared to what you'd do in usual mathematics (therefore, multiplying by +1j is CW ⭮, not CCW ⭯).
