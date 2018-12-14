@@ -198,7 +198,7 @@ Prime numbers will still need the solb2 solution but otherwise this gave a subst
 I could probably get a tiny little more time by filling in prime numbers with lots of smaller squares, 
 theortically I could half the number of iterations needed to build the prime totals. 
 
-Solution 4 should use this: https://en.wikipedia.org/wiki/Summed-area_table Word has it that this is a substationally fast algoritm to work this out. 
+Made solution 4  use this: https://en.wikipedia.org/wiki/Summed-area_table It is substationally faster than my previous fasted at about 14 seconds. 
 
 ## 12 https://adventofcode.com/2018/day/12
 
