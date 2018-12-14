@@ -243,3 +243,23 @@ His explanation:
 >> The best part about this is that directions are just one of the numbers +1, +1j, -1, -1j and changing a direction is as simple as multiplying it by either +1j (clockwise turn) or -1j (counterclockwise turn).
 >>
 >> Note that since the Y axis is flipped (positive = down), you flip the imaginary part compared to what you'd do in usual mathematics (therefore, multiplying by +1j is CW ⭮, not CCW ⭯).
+
+## 14 https://adventofcode.com/2018/day/14
+
+### pt a 
+
+following the pattern up to x, What are the scores of the ten recipes immediately after the number of recipes in your puzzle input?
+
+### pt b 
+
+Given the input, how many elements before it in the pattern
+
+### neat tricks i found / saw people doing / notes
+Most solutions roughly use the same concept this time round. I am beginning to notice that python might be quite slow to some of the other languages :p
+
+
+The method of circling around on the list can also be done with pythons divmod tool. May or may not be a nicer way of doing it?
+
+Some solutions involved just doing a string compare on the last 10 digits rather than have a string moving along. In retrospect i probobly could of just extracted the last x strings and did something similar (but the last 6 and 7 instead).
+
+One solution just generated the first 500000 and then searched the results for the first appearance of the string.
