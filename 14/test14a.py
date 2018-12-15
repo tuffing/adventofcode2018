@@ -10,7 +10,7 @@ from scaffolding import common
 class SolutionTest(unittest.TestCase):
 
         def test_run(self):
-                #remember to set the assert to the known examples and place the example test into testInput.txt!
+                # remember to set the assert to the known examples and place the example test into testInput.txt!
                 testObject = Solution()
                 self.assertEqual('5158916779', testObject.solution(9))
                 
