@@ -1,0 +1,51 @@
+mulr
+[ (7, 56), ]
+muli
+[( (10, 56), (7, 40)]
+banr
+[ (11, 47),]
+bani
+[(14, 55),]
+setr
+[, (8, 57),)]
+seti
+[ (12, 52), ,]
+gtir
+[(9, 59),  ]
+gtri
+[(6, 59), ]
+gtrr
+[ (13, 46)]
+eqir
+[(5, 46)]
+eqri
+[(4, 54)]
+eqrr
+[(2, 44)]
+addi
+[(3, 59),]
+addr
+[ (1, 40),]
+borr
+[ (0, 51)]
+bori
+ (15, 43),]
+
+
+
+EQIR: 5
+EQRR 2
+EQRI 4
+GTRR 13
+GTRI 6
+SETR 8
+GTIR 9
+BANR 11
+BANI 14
+SETI 12
+BORR 0
+BORI 15
+ADDR 1
+ADDI 3
+MULR 7
+MULI 10
