@@ -52,14 +52,14 @@ class Solution(object):
 			
 			#can go down?
 			if (flow[0], flow[1]+1) not in grid.keys():
-					
 				queue.append((flow[0], flow[1]+1))
 				continue
 			
+			#is there a running flow of water below us already?
 			if (flow[0], flow[1]+1) in grid.keys() and grid[(flow[0], flow[1]+1)] == 1:
 				continue
 			
-			#fill up a row?
+			#fill up a row or is there a cliff?
 			right = self.findExtents(grid, 1, flow)
 			left = self.findExtents(grid, -1, flow)
 			
@@ -91,7 +91,6 @@ class Solution(object):
 			for x in range(left[0], right[0]+1):
 				grid[(x, flow[1])] = 1
 		
-			#while True:
 		
 		wet = 0
 		for k, v in grid.items():
@@ -104,6 +103,7 @@ class Solution(object):
 				still += 1
 				
 		
+		#visualise because why not
 		minx =  min(grid, key = lambda t: t[0])[0]
 		maxx =  max(grid, key = lambda t: t[0])[0]
 		
@@ -134,8 +134,7 @@ class Solution(object):
 			if (x, point[1] +1) not in grid.keys():
 				return (x, point[1] +1)
 			#wall
-			if (x, point[1]) in grid.keys():
-				if grid[(x, point[1])] != 1:# or ((x, point[1]+1) in grid.keys() and grid[(x, point[1]+1)] == 1):
+			if (x, point[1]) in grid.keys() and grid[(x, point[1])] != 1:
 					return (x, point[1])
 				
 	

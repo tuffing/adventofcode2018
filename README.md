@@ -304,6 +304,7 @@ Given a list of opcode commands and the registry before and after, find out how 
 deduct what each opcode does then run the program
 
 ### neat tricks i found / saw people doing / notes
+Edit: Implemented this, took less than 10 minutes given my current code :p
 One my todo list is to redo this one but entirely automated. Including deducting down the opcodes - this would be an easy step 
 from where i am in sol16b as i've already done he hard part. 
 
@@ -314,3 +315,21 @@ One solution i liked was loading functions into a list and once the op codes had
 When I implement deduction I might copy this
 
 p.s forgetting to remove a deque.pop() only needed in the previous part can be a massive time suck when your answers are mysteriously way off correct. 
+
+## 17 https://adventofcode.com/2018/day/17
+
+### pt a 
+
+Given the map of clay etc How many tiles can the water reach within the range of y values in your scan?
+
+### pt b 
+
+how many were full
+
+### neat tricks i found / saw people doing / notes
+
+This is officially my favourite one so far, very fun. Left the visualisation in becaue it was cool. 
+
+This time round part b is in part a as it only was a line or two to add.
+
+Quite a few recursive solutions. I avoided it here as Python sucks with recursion and has a surprisingly small limit. Some people had success though.
