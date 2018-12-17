@@ -263,3 +263,54 @@ The method of circling around on the list can also be done with pythons divmod t
 Some solutions involved just doing a string compare on the last 10 digits rather than have a string moving along. In retrospect i probobly could of just extracted the last x strings and did something similar (but the last 6 and 7 instead).
 
 One solution just generated the first 500000 and then searched the results for the first appearance of the string.
+
+
+## 15 https://adventofcode.com/2018/day/15
+
+### pt a 
+
+Given the someone intricate rules what is the result of the combat (answer is rounds * hp remaining)
+
+### pt b 
+
+What is the minimum attack power needed for all of the elves to survice
+
+### neat tricks i found / saw people doing / notes
+From the solutions a good santity saver here are python dataclasses
+
+Looking at the score board and reddit this might be the most universally most difficult puzzle to get right.
+
+This was an unsual puzzle in which most of the solutions users gave don't actually work for inputs.
+The person solving it just got very lucky they didn't get some of the more suble and annoying edge cases
+
+My choice of Dijkstra's algorithm  may have been over kill :p A lot of people used a breadth first search to find the closest accessible 
+person. I might reimplment using that approach later down the track as it seems very fast here. I've always wanted to take a shot at a Dijkstra's algorithm. 
+
+I noticed one advantage of using this algorithm though is selecting the direction to go based on the rules was always trivial - 
+a lot of solutions got stuck on this step (though a lot of people got lucky and the're inputs worked anyway).
+Unfortunately I got stuck on other bug bears.
+
+I'm not happy with the speed, should eventually come back and optimise. Current solution is about 1 minute for part 1 and 4-5 for part 2. 
+My Dijkstra's algorithm is no doubt what's causing the slow down here. Even with it terminating roughly as soon as it finds the shortest path
+
+## 16 https://adventofcode.com/2018/day/16
+
+### pt a 
+
+Given a list of opcode commands and the registry before and after, find out how many opcodes are valid for each
+
+### pt b 
+
+deduct what each opcode does then run the program
+
+### neat tricks i found / saw people doing / notes
+One my todo list is to redo this one but entirely automated. Including deducting down the opcodes - this would be an easy step 
+from where i am in sol16b as i've already done he hard part. 
+
+I was sneaky and did the deduction step by hand - it didnt take long 5-10 minutes. 
+
+One solution i liked was loading functions into a list and once the op codes had been deducted, trigger the function by calling that list item
+
+When I implement deduction I might copy this
+
+p.s forgetting to remove a deque.pop() only needed in the previous part can be a massive time suck when your answers are mysteriously way off correct. 
