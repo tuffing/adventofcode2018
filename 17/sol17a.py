@@ -6,7 +6,6 @@ from scaffolding import common
 from collections import defaultdict, deque
 
 class Solution(object):
-	#inputNumbers = common.pullNumbersFromList(inputList, True) #True = include signs, False: all numbers are positive
 
 	def __init__(self):
 		pass
@@ -71,6 +70,7 @@ class Solution(object):
 				queue.append((flow[0], flow[1] - 1))
 				continue
 			
+			#if there is already a water fall, don't make another one next to it 
 			if (right[0] - 1, right[1]+1) in grid.keys() and grid[(right[0] - 1, right[1]+1)] == 1:
 				continue
 		
@@ -148,7 +148,7 @@ class Solution(object):
 		return values
 
 	def run(self):
-		inputList = common.loadInput('input.txt', True) #True = split, False = string
+		inputList = common.loadInput('input.txt', True)
 		print('Advent Day: %s', self.solution(inputList))
 		
 
