@@ -7,69 +7,55 @@ import copy
 from collections import deque, defaultdict, Counter
 
 class Solution(object):
-	#inputNumbers = common.pullNumbersFromList(inputList, True) #True = include signs, False: all numbers are positive
-
 	def __init__(self):
 		pass
 
-	def solution(self, inputList):
-		commands = deque(inputList)
-		#possibleMappings = defaultdict(list)
+	def solution(self, deductionList, programList):
+		commands = deque(deductionList)
 		possibleMappings = defaultdict(list)
+		
 		while len(commands):
-			#list(map(int, results))
 			registers = list(map(int, commands.popleft().replace('Before: [', '').replace(']', '').split(',')))
 			instruction = list(map(int, commands.popleft().split(' ')))
 			expectedResult = list(map(int,commands.popleft().replace('After:  [', '').replace(']', '').split(',')))
 			if len(commands):
 				commands.popleft()
 				
-			self.testInstruction(registers, instruction, expectedResult, possibleMappings)
-			match1 = True
-			match2 = True
-			match3 = True
-			match4 = True
-			if instruction[0] == 2:
-				reg = copy.copy(registers)
-				self.mulr(reg, instruction)
-				if (reg != expectedResult):
-					print('no match on 6')
-					match1 = False
-			if instruction[0] == 7:
-				reg = copy.copy(registers)
-				self.mulr(reg, instruction)
-				if (reg != expectedResult):
-					print('no match on 7')
-					match2 = False
-			if instruction[0] == 5:
-				reg = copy.copy(registers)
-				self.mulr(reg, instruction)
-				if (reg != expectedResult):
-					print('no match on 5')
-					match3 = False
-			if instruction[0] == 13:
-				reg = copy.copy(registers)
-				self.mulr(reg, instruction)
-				if (reg != expectedResult):
-					print('no match on 13')
-					match3 = False			
+			self.testInstruction(registers, instruction, expectedResult, possibleMappings)		
 		
-		if match1:
-			print(6)
-		if match2:
-			print(7)
-		if match3:
-			print(5)
-		if match4:
-			print(13)
+		mappings = defaultdict(str)
+		matches = defaultdict(list)
 		
+
 		for k, op in possibleMappings.items():
 			c = Counter(op) 
-			mostPop = c.most_common(15)
-			#print('%s: %d' % (k,mostPop[0][0]))
-			print(k)
-			print(mostPop)
+			mostPop = c.most_common()
+			matches[k] = mostPop
+		
+		while len(mappings) < 16:
+			for k, ops in matches.items():
+				if len(ops) == 1:
+					mappings[ops[0][0]] = k
+					del(matches[k])
+					break
+				for n in ops:
+					if n[0] in mappings.keys():
+						del[ops[ops.index(n)]]
+		
+		print('Op Code Mappings:')
+		for k, op in mappings.items():
+			print('%s:%s' % (op, k))
 			
+		commands = deque(programList)
+		reg = [0,0,0,0]
+		while len(commands):
+			instruction = list(map(int, commands.popleft().split(' ')))
+			getattr(self, mappings[instruction[0]])(reg, instruction)
+			
+		print('Final Registry:')
+		print(reg)
+		
+		return reg[0]
 		#return total
 	
 	def testInstruction(self, registers, instruction, expectedResult, possibleMappings):
@@ -320,7 +306,8 @@ class Solution(object):
 
 	def run(self):
 		inputList = common.loadInput('input.txt', True) #True = split, False = string
-		print('Advent Day: %s' % self.solution(inputList))
+		inputList2 = common.loadInput('input2.txt', True) #True = split, False = string
+		print('Advent Day: %s' % self.solution(inputList, inputList2))
 		
 
 
