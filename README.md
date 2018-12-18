@@ -333,3 +333,32 @@ This is officially my favourite one so far, very fun. Left the visualisation in 
 This time round part b is in part a as it only was a line or two to add.
 
 Quite a few recursive solutions. I avoided it here as Python sucks with recursion and has a surprisingly small limit. Some people had success though.
+
+
+
+## 18 https://adventofcode.com/2018/day/18
+
+### pt a 
+
+What will the total resource value of the lumber collection area be after 10 minutes?
+
+
+### pt b 
+
+1000000000
+
+### neat tricks i found / saw people doing / notes
+
+After solving the first one there wasn't a whole lot left to solve for number two. it was watch the pattern for a few hundred ticks
+and then the same numbers started rotating through every 28. from there getting the number for 1000000000 trivial with out needing
+any programming: Once the pattern starts find the mod of each value as it repeats and check if it has the same mod as our big number ( -1 as list starts at 0..).
+
+
+A challenge at some point will be to code this but I doubt it'll be hard. Just monitor for when the pattern kicks in then do the math there.
+
+The following from someone elses solution i thought was a nice way of getting the surrounding cells:
+``` 
+neighbors = ''.join(get(y+a, x+b) for (a, b) in
+                                [(-1, -1), (-1, 0), (-1, 1), (0, -1),
+                                 (0, 1), (1, -1), (1, 0), (1, 1)])
+```
