@@ -362,3 +362,22 @@ neighbors = ''.join(get(y+a, x+b) for (a, b) in
                                 [(-1, -1), (-1, 0), (-1, 1), (0, -1),
                                  (0, 1), (1, -1), (1, 0), (1, 1)])
 ```
+
+
+## 19 https://adventofcode.com/2018/day/19
+
+### pt a 
+
+What value is left in register 0 when the background process halts?
+
+### pt b 
+
+A new background process immediately spins up in its place. It appears identical, but on closer inspection, you notice that this time, register 0 started with the value 1.
+
+What value is left in register 0 when this new background process halts?
+
+### neat tricks i found / saw people doing / notes
+
+Part a was a simple modification of day 16. Part 2 was a nightmare. I eventually solved it by finding the factorixation of 
+one of the values in my registry.. using google. A proper solution would be to sit down and properly understand what the input is doing
+and right a more efficient version of the same code.
