@@ -381,3 +381,21 @@ What value is left in register 0 when this new background process halts?
 Part a was a simple modification of day 16. Part 2 was a nightmare. I eventually solved it by finding the factorixation of 
 one of the values in my registry.. using google. A proper solution would be to sit down and properly understand what the input is doing
 and right a more efficient version of the same code.
+
+## 20 https://adventofcode.com/2018/day/20
+
+### pt a 
+
+Build the map and find the shortest distance
+
+### pt b 
+
+count all rooms in which you go through over 1000 doors
+
+### neat tricks i found / saw people doing / notes
+
+My Dijkstra algorithm from day 15 made the second part of this trivial. First half i did via just using queues and recursion for the brackets.
+
+There was a very nice short and sweet python solution using the networkX library. 
+
+Very jealous it's a third party library, but stuff like this makes me want to come back and do some of these using third parties.
