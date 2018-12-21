@@ -396,6 +396,30 @@ count all rooms in which you go through over 1000 doors
 
 My Dijkstra algorithm from day 15 made the second part of this trivial. First half i did via just using queues and recursion for the brackets.
 
+If I were to optimise this the first step would be to remove all the doors. Could probably not even bother with the walls.
+This wouldn't improve the primary 
+
 There was a very nice short and sweet python solution using the networkX library. 
 
 Very jealous it's a third party library, but stuff like this makes me want to come back and do some of these using third parties.
+
+## 21 https://adventofcode.com/2018/day/21
+
+### pt a 
+
+Use my day 16/19 code again against the given program. Find the value to start reg 0 with to halt the program asap.
+
+### pt b 
+
+Find the number to put in reg[0] that will make the program run the longest with out 
+
+### neat tricks i found / saw people doing / notes
+
+Part a was trivial, there was only one input entry that ever used reg 0 so i simply monitored that command and checked what it was expecting.
+
+Part 2, I needed to go to the movies very soon, so I just put the input to run until it found a repeat. As long as it was done by the time
+i got back i was happy :p
+
+This is when i discovered that if i ran it using pypy instead id have gotten the answer with in a minute or two.
+
+Alterntive solution to part 2 would be to reverse engineer the input program and write my own version of it's calculations. Which I might do at some point.
