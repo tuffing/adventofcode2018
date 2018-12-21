@@ -33,22 +33,25 @@ class Solution(object):
 		minY = rKeys[0]
 		maxY = rKeys[len(rKeys)-1]
 		minX = 0
-		minX = 0
+		maxX = 0
 		
 		for y in rKeys:
 			row = rooms[y]
 			keys = list(row.keys())
 			keys.sort()
 			
-			minX = keys[0]
-			maxX = keys[len(keys)-1]			
+			if minX > keys[0]:
+				minX = keys[0]
+				
+			if keys[len(keys)-1] > maxX:
+				maxX = keys[len(keys)-1]			
 			
 			s = ''
 			for k in keys:
 				if row[k] == symbols['dunno']:
 					row[k] = symbols['wall']
 				s = '%s%s' % (s, row[k])
-			#print(s)
+			print(s)
 			
 		rooms[0][0] = 0
 		originalRooms = copy.deepcopy(rooms)
@@ -166,7 +169,7 @@ class Solution(object):
 				self.findPointDistances(x, y+1, rows, minX, maxX, minY, maxY)
 
 	def run(self):
-		inputList = common.loadInput('input.txt', False) #True = split, False = string
+		inputList = common.loadInput('test6.txt', False) #True = split, False = string
 		print('Advent Day: X')
 		self.solution(inputList)
 
