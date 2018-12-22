@@ -423,3 +423,22 @@ i got back i was happy :p
 This is when i discovered that if i ran it using pypy instead id have gotten the answer with in a minute or two.
 
 Alterntive solution to part 2 would be to reverse engineer the input program and write my own version of it's calculations. Which I might do at some point.
+
+
+## 22 https://adventofcode.com/2018/day/22
+
+### pt a 
+
+What is the total risk level for the smallest rectangle that includes 0,0 and the target's coordinates?
+
+### pt b 
+
+What is the fewest number of minutes you can take to reach the target?
+
+### neat tricks i found / saw people doing / notes
+
+I want to come back and redo this one with an optimal solution. currently it's a 3d Dijkstra.
+
+I suspect either A* or another trick will be effective. 
+
+Also intend to go through and reduce my code a bit. the entire positional selection stuff can be reduced quite a bit
