@@ -442,3 +442,26 @@ I want to come back and redo this one with an optimal solution. currently it's a
 I suspect either A* or another trick will be effective. 
 
 Also intend to go through and reduce my code a bit. the entire positional selection stuff can be reduced quite a bit
+
+## 23 https://adventofcode.com/2018/day/22
+
+### pt a 
+
+Find the nanobot with the largest signal radius. How many nanobots are in range of its signals?
+
+### pt b 
+
+Find the point that touches the most bot ranges. What is the shortest manhattan distance between any of those points and 0,0,0?
+
+### neat tricks i found / saw people doing / notes
+
+Most people used pythons Z3 which is an SMT ("Satisfiability modulo theories") library. Of course i couldn't use that so the long way it is!
+
+I ended up trying a lot of different ideas for this one. My first proper attempt was to use a reduction search. Starting with a huge cube,
+and working my way down to smaller cubes. But couldn't get the right answer! Later i discovered i had the math wrong for determining 
+if a bot radius was with in the cube (grrrr). Sol c, and d were hacky solutions that happened to give others the right answers. but not got close for me.
+
+sol23 e is just sol23 b but with better cube break downs and as such much better speed. A binary search instead of droping each type by a factor of 10. 
+
+note to self, there's a great short cut in python where you can assign each point in a tuple to different variables.
+e.g: `x,y,z = (1,2,3)`
