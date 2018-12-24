@@ -1,0 +1,10 @@
+4154,21287,immune:fire,immune:slashing,immune:cold,immune:radiation,attack fire 9,5
+2091,5531,immune:slashing,attack fire 5,13
+2237,24000,attack fire 20,16
+149,31282,weak:radiation,weak:cold,attack radiation 329,8
+649,39642,attack cold 108,18
+108,35626,immune:radiation,weak:slashing,attack cold 519,4
+1194,37567,weak:fire,weak:radiation,attack radiation 59,19
+2849,37603,immune:cold,attack bludgeoning 26,10
+451,35892,weak:slashing,immune:cold,attack fire 133,14
+3232,27332,weak:fire,attack cold 14,11

@@ -1,0 +1,2 @@
+17,5390,weak:radiation,weak:bludgeoning,attack fire 4507,2
+989,1274,immune:fire,weak:bludgeoning,weak:slashing,attack slashing 25,3

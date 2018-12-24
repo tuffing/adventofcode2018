@@ -443,7 +443,7 @@ I suspect either A* or another trick will be effective.
 
 Also intend to go through and reduce my code a bit. the entire positional selection stuff can be reduced quite a bit
 
-## 23 https://adventofcode.com/2018/day/22
+## 23 https://adventofcode.com/2018/day/23
 
 ### pt a 
 
@@ -465,3 +465,40 @@ sol23 e is just sol23 b but with better cube break downs and as such much better
 
 note to self, there's a great short cut in python where you can assign each point in a tuple to different variables.
 e.g: `x,y,z = (1,2,3)`
+
+## 24 https://adventofcode.com/2018/day/24
+
+### pt a 
+
+You have an army of infections and an army of immunities. Make them fight
+
+You scan the reindeer's condition (your puzzle input); the white-bearded man looks nervous. As it stands now, how many units would the winning army have?
+
+### pt b 
+
+Find the minimum modifier to make immune win
+
+### neat tricks i found / saw people doing / notes
+
+@todo 1: On my todo list is to remove the infinite loop issue if there's a tie. Should be trivial but lazy :p
+
+@todo 2: Go through and implement proper data classes and objects. 
+
+I initial used a binary search, but realised that with the possibility of ties it could (and did) give false positives.
+Luckily as the binary search told me, the answer is quite low. So I switched it to use increments instead - it found it in less than a second
+making a binary search pointless anyway :p.
+
+An easy point of optimisation would be to not reparse the groups every run through.
+
+I chose to play with heapq (prioritiy queues) to sort out turns quickly. 
+To sort out tries on turn order I set the heapq id to the effective power multiplied by 100 and then the inititive added. 
+Then made a negative so that the heapq would select it in the right order. I picked 100 as the iniatives do not go above 20.
+Fairly pleased with the result.
+
+The trend today was to actually use proper Classes to represent each group. Using functions with in the class to calculate the damage and initive etc.
+This also made it easy to do the sorts as he could easily use a lamdba with these functions. 
+I think as a response to the debugging nightmare that was day 15, people chose to slow down a bit and do things as cleanly and clear as possible to make debugging less painful. 
+
+I'm not complaining, todays solutions are the most readable code samples yet! 
+
+Saw someone using @property, this is a vice way of effectively doing getters and setters in python 
