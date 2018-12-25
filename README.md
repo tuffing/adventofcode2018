@@ -502,3 +502,18 @@ I think as a response to the debugging nightmare that was day 15, people chose t
 I'm not complaining, todays solutions are the most readable code samples yet! 
 
 Saw someone using @property, this is a vice way of effectively doing getters and setters in python 
+
+
+## 25 https://adventofcode.com/2018/day/25
+
+### pt a 
+
+given a list of 4d coords - How many constellations are formed by the fixed points in spacetime?
+
+### pt b 
+
+Game end :) No part 2
+
+### neat tricks i found / saw people doing / notes
+
+My first sol was super quick and rough. sol25a2 is the algorithm reduced down significantly - with the bonus of it being significantly faster.
