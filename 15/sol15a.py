@@ -9,7 +9,7 @@ import copy
 
 class Solution(object):
 	#i nputNumbers = common.pullNumbersFromList(inputList, True) #True = include signs, False: all numbers are positive
-
+	#170.115s
 	def __init__(self):
 		pass
 
@@ -30,14 +30,15 @@ class Solution(object):
 		
 		count = 0
 		while True:
-			self.tick(goblins, elves, allPlayers,rows)
-			#print(count)
 			#for r in rows:
 			#	print(r)
-			
+
+
+			self.tick(goblins, elves, allPlayers,rows)
+			#print(count)
 			if len(elves) == 0 or len(goblins) == 0:
 				break
-			print(count)
+			#print(count)
 			count = count + 1
 		#for r in rows:
 		#	print(r)		
@@ -52,7 +53,7 @@ class Solution(object):
 		
 		result = hp * (count)
 		
-		#print('Solution Here %s' % result)
+		print('Solution Here %s' % result)
 		return result
 	
 	def tick(self, goblins, elves, allPlayers, rows):
@@ -87,7 +88,7 @@ class Solution(object):
 				#	print(r)
 			
 			closest, distance = self.findClosestEnemies((player['x'], player['y']), player['distances'], enemies, allPlayers, rows)
-			
+			#print(closest);
 			if closest != None:
 				#if closest isn't in range, move
 				if distance > 0:
@@ -292,8 +293,17 @@ class Solution(object):
 			badEle = 'G'
 			if players[p]['side'] == 'G':
 				badEle = 'E'
-				
+		
+	
 			self.findPointDistances(x, y, workingRows, badEle, firstEnemyDistance)
+			
+			
+			if (x == 16 and y == 3):
+				#a = rows[c[1]][c[0]]
+				test = 'here'
+				#for r in rows:
+				#	print(r)
+					
 			players[p]['distances'] = workingRows
 											
 	def findPointDistances2(self, x, y, rows, badEle, firstEnemyDistance):
@@ -301,6 +311,12 @@ class Solution(object):
 		queue.append((x,y));
 		obstacles = ['#', 'E', 'G']
 		rows[y][x] = 0
+		
+		if (x == 16 and y == 3):
+			#a = rows[c[1]][c[0]]
+			test = 'here'
+			for r in rows:
+				print(r)		
 		
 		while len(queue):
 			v = queue.popleft()
@@ -376,7 +392,7 @@ class Solution(object):
 	#def buildClosestDistances(map):
 
 	def run(self):
-		inputList = common.loadInput('input.txt', True) #True = split, False = string
+		inputList = common.loadInput('testInput.txt', True) #True = split, False = string
 		print('Advent Day: X')
 		self.solution(inputList)
 
