@@ -37,7 +37,7 @@ class Solution(object):
 			
 			if len(elves) == 0 or len(goblins) == 0:
 				break
-			print(count)
+			#print(count)
 			count = count + 1
 		#for r in rows:
 		#	print(r)		
@@ -52,7 +52,7 @@ class Solution(object):
 		
 		result = hp * (count)
 		
-		#print('Solution Here %s' % result)
+		print('Solution Here %s' % result)
 		return result
 	
 	def tick(self, goblins, elves, allPlayers, rows):
@@ -86,11 +86,13 @@ class Solution(object):
 				#for r in player['distances']:
 				#	print(r)
 			
-			closest, distance = self.findClosestEnemies((player['x'], player['y']), player['distances'], enemies, allPlayers, rows)
-			
+			closest, distance = self.findClosestEnemies((player['x'], player['y']), player['distances'], enemies, allPlayers, rows, player['closest'])
+			#closest = player['closest']
+			#distance = player['dist']
+			print(closest)
 			if closest != None:
 				#if closest isn't in range, move
-				if distance > 0:
+				if distance is not None and distance > 0:
 					rows[player['y']][player['x']] = '.'
 					player['x'] = closest[0]
 					player['y'] = closest[1]
@@ -163,7 +165,7 @@ class Solution(object):
 	#def pickDirection(choices, distances):
 		
 	
-	def findClosestEnemies(self, playerCoords, distances, enemies, players, rows):
+	def findClosestEnemies(self, playerCoords, distances, enemies, players, rows, closest):
 		obstacles = ['#', 'E', 'G', '.']
 		closest = None 
 		smallest = 100000
@@ -241,22 +243,7 @@ class Solution(object):
 		#check reading order of coords
 		x = playerCoords[0]
 		y = playerCoords[1]		
-		
-		#top	
-		#if y - 1 >= 0 and (distances[y-1][x] not in obstacles) and distances[y-1][x] == smallest:
-		#	smallest = distances[y-1][x]
-		#	closest = (x, y-1)
-		#left
-		#elif x - 1 >= 0 and (distances[y][x-1] not in obstacles) and distances[y][x-1] == smallest:
-		#	smallest = distances[y][x-1]
-		#	closest = (x-1, y)					
-		#right
-		#elif x + 1 < len(rows[y]) and (distances[y][x+1] not in obstacles) and distances[y][x+1] == smallest:
-		#	smallest = distances[y][x+1]
-		#	closest = (x+1, y)
-		#bottom
-		#	smallest = distances[y+1][x]
-		#	closest = (x, y+1)	
+
 
 	
 		
@@ -293,87 +280,69 @@ class Solution(object):
 			if players[p]['side'] == 'G':
 				badEle = 'E'
 				
-			self.findPointDistances(x, y, workingRows, badEle, firstEnemyDistance)
+			closest = self.findPointDistances(x, y, workingRows, badEle, firstEnemyDistance)
 			players[p]['distances'] = workingRows
+			players[p]['closest'] = closest[0]
+			players[p]['dist'] = closest[1]
 											
-	def findPointDistances2(self, x, y, rows, badEle, firstEnemyDistance):
+	def findPointDistances(self, x, y, rows, badEle, firstEnemyDistance):
 		queue = deque();
 		queue.append((x,y));
 		obstacles = ['#', 'E', 'G']
 		rows[y][x] = 0
+		closest = 10000
+		closestCoords = (1000,1000)
+		
+		if (x == 16 and y == 3):
+			#a = rows[c[1]][c[0]]
+			test = 'here'
+			#for r in rows:
+			#	print(r)			
 		
 		while len(queue):
 			v = queue.popleft()
+			
+			if (rows[v[1]][v[0]] + 1 > closest):
+				continue
+			
 			coords = [(v[0]-1,v[1]),(v[0]+1,v[1]),(v[0],v[1]-1), (v[0], v[1]+1)]
+			badFound = False			
+			
+			if v[0] == 15 and v[1] == 4 and x==16 and y == 3:
+				hi = 'a'			
 			
 			for c in coords:
-				test1 = rows[c[1]][c[0]] not in obstacles 
-				test2 = rows[c[1]][c[0]]
-				test3 = rows[v[1]][v[0]]
+				test1 = rows[c[1]][c[0]]
+				if rows[c[1]][c[0]] == badEle and rows[v[1]][v[0]] < closest:
+					badFound = True
+					closest = rows[v[1]][v[0]]
+					#top, left, right, bottom
+					if v[1] < closestCoords[1]:
+						closestCoords = v
+					elif v[0] < closestCoords[0]:
+						closestCoords = v					
+					
+			if badFound:
+				continue
+				
+			for c in coords:
 				if rows[c[1]][c[0]] not in obstacles and (rows[c[1]][c[0]] == '.' or rows[c[1]][c[0]] > rows[v[1]][v[0]] +1):
 					rows[c[1]][c[0]] = rows[v[1]][v[0]] + 1
 					queue.append(c)
+		
+		if (x == 16 and y == 3):
+			#a = rows[c[1]][c[0]]
+			test = 'here'
+			#for r in rows:
+			#	print(r)		
 				
-		
-		return rows
-		
-	
-	
-	def findPointDistances(self, x, y, rows, badEle, firstEnemyDistance):
-		distance = int(rows[y][x]) + 1
-		obstacles = ['#', 'E', 'G']
-		badEleFound = False
-		
-		if distance > firstEnemyDistance['distance']:
-			return
-		
-		# left
-		if x - 1 >= 0:
-			if rows[y][x-1] not in obstacles and (rows[y][x-1] == '.' or int(rows[y][x-1]) > distance):
-				rows[y][x-1] = distance
-				self.findPointDistances(x-1, y, rows, badEle, firstEnemyDistance)
-			elif rows[y][x-1] == badEle:
-				if distance < firstEnemyDistance['distance']:
-					firstEnemyDistance['distance'] = distance
-				else:
-					return
-		
-		#right	
-		if x + 1 < len(rows[y]):
-			if rows[y][x+1] not in obstacles and (rows[y][x+1] == '.' or rows[y][x+1] > distance):
-				rows[y][x+1] = distance
-				self.findPointDistances(x+1, y, rows, badEle, firstEnemyDistance)
-			elif rows[y][x+1] == badEle:
-				if distance < firstEnemyDistance['distance']:
-					firstEnemyDistance['distance'] = distance
-				else:
-					return				
-				
-		#top	
-		if y >= 0:
-			if rows[y-1][x] not in obstacles and (rows[y-1][x] == '.' or rows[y-1][x] > distance):
-				rows[y-1][x] = distance
-				self.findPointDistances(x, y-1, rows, badEle, firstEnemyDistance)
-			elif rows[y-1][x]  == badEle:
-				if distance < firstEnemyDistance['distance']:
-					firstEnemyDistance['distance'] = distance
-				else:
-					return				
+		if closest == 10000:
+			closest = None
+			closestCoords = None
 			
-		#bottom
-		if y + 1 <  len(rows):
-			if rows[y+1][x] not in obstacles and (rows[y+1][x] == '.' or rows[y+1][x] > distance):
-				rows[y+1][x] = distance
-				self.findPointDistances(x, y+1, rows, badEle, firstEnemyDistance)	
-			elif rows[y+1][x] == badEle:
-				if distance < firstEnemyDistance['distance']:
-					firstEnemyDistance['distance'] = distance
-				else:
-					return					
+		return (closestCoords, closest)
 		
 	
-	
-	#def buildClosestDistances(map):
 
 	def run(self):
 		inputList = common.loadInput('input.txt', True) #True = split, False = string

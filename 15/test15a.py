@@ -5,7 +5,7 @@ import unittest
 from sol15a import *
 
 sys.path.append('../')
-from scaffolding import common
+import common
 
 class SolutionTest(unittest.TestCase):
 
@@ -37,7 +37,13 @@ class SolutionTest(unittest.TestCase):
                 #remember to set the assert to the known examples and place the example test into testInput.txt!
                 inputList = common.loadInput('testInput5.txt', True) 
                 testObject = Solution()
-                self.assertEqual(39514, testObject.solution(inputList))            
+                self.assertEqual(39514, testObject.solution(inputList)) 
+
+        def test_run6(self):
+                #remember to set the assert to the known examples and place the example test into testInput.txt!
+                inputList = common.loadInput('input.txt', True) 
+                testObject = Solution()
+                self.assertEqual(228730, testObject.solution(inputList))       
 
 
 if __name__ == '__main__':
