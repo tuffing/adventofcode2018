@@ -43,7 +43,21 @@ class SolutionTest(unittest.TestCase):
                 #remember to set the assert to the known examples and place the example test into testInput.txt!
                 inputList = common.loadInput('input.txt', True) 
                 testObject = Solution()
-                self.assertEqual(228730, testObject.solution(inputList))       
+                self.assertEqual(228730, testObject.solution(inputList))
+                
+
+        def test_run7(self):
+                #remember to set the assert to the known examples and place the example test into testInput.txt!
+                inputList = common.loadInput('testInput10.txt', True) 
+                testObject = Solution()
+                self.assertEqual(181522, testObject.solution(inputList))
+                
+        def test_run8(self):
+                #This covers an edge case i currently don't account for
+                inputList = common.loadInput('testInput11.txt', True) 
+                testObject = Solution()
+                self.assertEqual(261855, testObject.solution(inputList))                    
+
 
 
 if __name__ == '__main__':
