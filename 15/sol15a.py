@@ -189,7 +189,7 @@ class Solution(object):
 			
 			coords = [(v[0]-1,v[1]),(v[0]+1,v[1]),(v[0],v[1]-1), (v[0], v[1]+1)]
 			badFound = False						
-			
+				
 			for c in coords:
 				if rows[c[1]][c[0]] == badEle and rows[v[1]][v[0]] <= closest:
 					badFound = True
@@ -198,12 +198,11 @@ class Solution(object):
 					if v[1] < closestCoords[1]:
 						closestCoords = v
 					elif v[1] == closestCoords[1] and v[0] < closestCoords[0]:
-						closestCoords = v
-						
-			if badFound:
-				continue
+						closestCoords = v				
 				
-			for c in coords:
+				if badFound:
+					continue
+				
 				if rows[c[1]][c[0]] not in obstacles and (rows[c[1]][c[0]] == '.' or rows[c[1]][c[0]] > rows[v[1]][v[0]] +1):
 					rows[c[1]][c[0]] = rows[v[1]][v[0]] + 1
 					queue.append(c)
