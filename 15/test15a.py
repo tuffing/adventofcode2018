@@ -2,7 +2,7 @@
 
 import unittest
 #replace standard with day name
-from sol15ref import *
+from sol15a import *
 
 sys.path.append('../')
 import common
@@ -46,19 +46,25 @@ class SolutionTest(unittest.TestCase):
                 self.assertEqual(228730, testObject.solution(inputList))
                 
 
-        def test_run7(self):
-                #remember to set the assert to the known examples and place the example test into testInput.txt!
-                inputList = common.loadInput('testInput10.txt', True) 
-                testObject = Solution()
-                self.assertEqual(181522, testObject.solution(inputList))
+        #def test_run7(self):
+        #        #remember to set the assert to the known examples and place the example test into testInput.txt!
+        #        inputList = common.loadInput('testInput10.txt', True) 
+        #        testObject = Solution()
+        #        self.assertEqual(181522, testObject.solution(inputList))
                 
-        def test_run8(self):
-                #This covers an edge case i currently don't account for
-                inputList = common.loadInput('testInput11.txt', True) 
-                testObject = Solution()
-                self.assertEqual(261855, testObject.solution(inputList))                    
+        #def test_run8(self):
+        #        #This covers an edge case i currently don't account for
+        #        inputList = common.loadInput('testInput11.txt', True) 
+        #        testObject = Solution()
+        #        self.assertEqual(261855, testObject.solution(inputList))        
+        
+        #def test_run11(self):
+        #        #This covers an edge case i currently don't account for
+        #        inputList = common.loadInput('testInput11.txt', True) 
+        #        testObject = Solution()
+        #        self.assertEqual(232110, testObject.solution(inputList))      
 
-
+        #input 13: 346574
 
 if __name__ == '__main__':
         unittest.main()

@@ -8,7 +8,7 @@ import copy
 
 
 class Solution(object):
-	# 6.292s
+	# 8.293s
 
 	def __init__(self):
 		pass
@@ -29,11 +29,15 @@ class Solution(object):
 		
 		count = 0
 		while True:
+			for r in rows:
+				print(r)
+			print('---')
+			
 			self.tick(goblins, elves, allPlayers,rows)
-
+			print(count)
 			if len(elves) == 0 or len(goblins) == 0:
 				break
-			print(count)
+			#print(count)
 			count = count + 1
 
 		winner = elves
@@ -201,10 +205,10 @@ class Solution(object):
 		closest = 10000
 		closestCoords = (1000,1000)
 		
-		t = (x, y+1)
+		t = (x, y-1)
 		l = (x-1,y)
 		r = (x+1,y)
-		b = (x,y-1)
+		b = (x,y+1)
 		
 		while len(queue):
 			v = queue.popleft()
@@ -279,7 +283,7 @@ class Solution(object):
 	
 
 	def run(self):
-		inputList = common.loadInput('testInput10.txt', True)
+		inputList = common.loadInput('testInput4.txt', True)
 		print('Advent Day: X')
 		self.solution(inputList)
 
