@@ -49,10 +49,12 @@ class Solution(object):
 		return result
 	
 	def tick(self, goblins, elves, allPlayers, rows):
+		count = 0
 		newPlayerList = []
 		
 		while len(allPlayers):
-			y, x, player = heapq.heappop(allPlayers)
+			count += 1
+			y, x, decider, player = heapq.heappop(allPlayers)
 
 			if len(player) == 0 or player['hp'] <= 0:
 				continue			
@@ -108,7 +110,7 @@ class Solution(object):
 						rows[target['y']][target['x']] = '.'
 						enemies.remove(target)
 
-			heapq.heappush(newPlayerList, (player['y'],player['x'],player))
+			heapq.heappush(newPlayerList, (player['y'],player['x'],count,player))
 			
 			
 			if len(goblins) == 0 or len(elves) == 0:
@@ -155,7 +157,7 @@ class Solution(object):
 					else:
 						elves.append(player)
 					
-					heapq.heappush(allPlayers, (y,x,player))
+					heapq.heappush(allPlayers, (y,x,0,player))
 					
 		return allPlayers
 			
@@ -198,10 +200,9 @@ class Solution(object):
 					if v[1] < closestCoords[1]:
 						closestCoords = v
 					elif v[1] == closestCoords[1] and v[0] < closestCoords[0]:
-						closestCoords = v				
+						closestCoords = v
+					break
 				
-				if badFound:
-					continue
 				
 				if rows[c[1]][c[0]] not in obstacles and (rows[c[1]][c[0]] == '.' or rows[c[1]][c[0]] > rows[v[1]][v[0]] +1):
 					rows[c[1]][c[0]] = rows[v[1]][v[0]] + 1

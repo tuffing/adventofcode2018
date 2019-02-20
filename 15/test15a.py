@@ -46,25 +46,55 @@ class SolutionTest(unittest.TestCase):
                 self.assertEqual(228730, testObject.solution(inputList))
                 
 
-        #def test_run7(self):
-        #        #remember to set the assert to the known examples and place the example test into testInput.txt!
-        #        inputList = common.loadInput('testInput10.txt', True) 
-        #        testObject = Solution()
-        #        self.assertEqual(181522, testObject.solution(inputList))
+        def test_run7(self):
+                #remember to set the assert to the known examples and place the example test into testInput.txt!
+                inputList = common.loadInput('testInput10.txt', True) 
+                testObject = Solution()
+                self.assertEqual(181522, testObject.solution(inputList))
                 
         #def test_run8(self):
-        #        #This covers an edge case i currently don't account for
+        #        #This may cover an edge case BUT the expected answer is unconfirmed.
         #        inputList = common.loadInput('testInput11.txt', True) 
         #        testObject = Solution()
-        #        self.assertEqual(261855, testObject.solution(inputList))        
+        #        self.assertEqual(261855, testObject.solution(inputList))  
+
+        def test_run9(self):
+                inputList = common.loadInput('testInput14.txt', True) 
+                testObject = Solution()
+                self.assertEqual(248848, testObject.solution(inputList))         
+        
+        def test_run10(self):
+                inputList = common.loadInput('testInput15.txt', True) 
+                testObject = Solution()
+                self.assertEqual(201638, testObject.solution(inputList))          
         
         #def test_run11(self):
-        #        #This covers an edge case i currently don't account for
+        #        #This may cover an edge case BUT the expected answer is unconfirmed.
         #        inputList = common.loadInput('testInput11.txt', True) 
         #        testObject = Solution()
-        #        self.assertEqual(232110, testObject.solution(inputList))      
+        #        self.assertEqual(232110, testObject.solution(inputList))    
+        
+        def test_run12(self):
+                inputList = common.loadInput('testInput13.txt', True) 
+                testObject = Solution()
+                self.assertEqual(346574, testObject.solution(inputList))         
+                
+        def test_run13(self):
+                inputList = common.loadInput('testInput16.txt', True) 
+                testObject = Solution()
+                self.assertEqual(195774, testObject.solution(inputList))     
+                
+        def test_run14(self):
+                inputList = common.loadInput('testInput17.txt', True) 
+                testObject = Solution()
+                self.assertEqual(206720, testObject.solution(inputList))
+                
+        #def test_run15(self):
+        #        #This may cover an edge case BUT the expected answer is unconfirmed.
+        #        inputList = common.loadInput('testInput18.txt', True) 
+        #        testObject = Solution()
+        #        self.assertEqual(190012, testObject.solution(inputList))  
 
-        #input 13: 346574
 
 if __name__ == '__main__':
         unittest.main()
