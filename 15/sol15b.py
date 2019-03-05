@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 
 import sys
-sys.path.append('../')
-from scaffolding import common
-from collections import defaultdict
+#sys.path.append('../')
+import common
+from collections import defaultdict, deque
 import copy
-
+import heapq
 
 class Solution(object):
-	#i nputNumbers = common.pullNumbersFromList(inputList, True) #True = include signs, False: all numbers are positive
 
 	def __init__(self):
 		pass
@@ -18,91 +17,53 @@ class Solution(object):
 		for i in inputFile:
 			rowsOriginal.append(list(i))
 		
+		pointDistances = defaultdict(list)
 		
-		goblinsOriginal = set()
-		elvesOriginal = set()
-		allPlayersOriginal = defaultdict(dict)
+		goblins = list()
+		elves = list()
 		count = 0
-		lowestAttack = 200
-		lowestAttackCount = 0
-		winningElves = None
-		self.pullOutPlayers(rowsOriginal, goblinsOriginal, elvesOriginal, allPlayersOriginal)
-		trys = set()
-		attackPower = 200
-		nextStep = 200
-		while True:
-			print(attackPower)
-			count = 0
-			rows = copy.deepcopy(rowsOriginal)
-			goblins = copy.deepcopy(goblinsOriginal)
-			elves = copy.deepcopy(elvesOriginal)
-			allPlayers = copy.deepcopy(allPlayersOriginal)
-			while True:
-				self.tick(goblins, elves, allPlayers,rows, attackPower)
-				#print(count)
-				#for r in rows:
-				#	print(r)
-				count = count + 1
-				if len(elves) == 0 or len(goblins) == 0:
-					break
-				
-				
-			if len(elves) == len(elvesOriginal) and attackPower < lowestAttack:
-				lowestAttackCount = count
-				lowestAttack = attackPower
-				winningElves = allPlayers
-			
-			#if nextStep == 1:
-			#	break
-			
-			trys.add(lowestAttack)
-			
-			if nextStep // 2 == 0:
-				nextStep = 1
-			else:
-				nextStep = nextStep//2
-
-			
-			if len(elves) == len(elvesOriginal):
-				attackPower -= nextStep
-			else:
-				attackPower += nextStep
-			
-			if attackPower in trys:
-				break
-			
-
-		#for r in rows:
-		#	print(r)		
 		
+		for attackPower in range(4, 50):
+			rows = copy.deepcopy(rowsOriginal)
+			goblins = list()
+			elves = list()
+			allPlayers = self.pullOutPlayers(rowsOriginal, goblins, elves)
+			totalElves = len(elves)
+			
+			count = 0
+			while True:
+				allPlayers = self.tick(goblins, elves, allPlayers,rows ,attackPower)
+				count = count + 1
+					
+				if len(goblins) == 0 or len(elves) == 0 or count > 100:
+					break
+							
+			
+			if len(elves) == totalElves:
+				break
+
+		winner = elves
+		if len(goblins):
+			winner = goblins
 		hp = 0
 		
-		for w in winningElves:
-			hp += winningElves[w]['hp']
+		for w in winner:
+			hp += w['hp']
 		
-		result = hp * (lowestAttackCount)
-		print(hp * (lowestAttackCount-1))
+		result = hp * (count-1)
 		
 		print('Solution Here %s' % result)
 		return result
 	
 	def tick(self, goblins, elves, allPlayers, rows, attackPower):
-		turns = list(allPlayers.keys())
-		turns.sort()
+		count = 0
+		newPlayerList = []
 		
-		self.setMapDistances(rows, allPlayers)
-		
-		
-		for t in turns:
-			if t == None:
-				continue
-			
-			change = False
-			player = allPlayers[t]
-			
-			del(allPlayers[t])
-			
-			if len(player) == 0:
+		while len(allPlayers):
+			count += 1
+			y, x, decider, player = heapq.heappop(allPlayers)
+
+			if len(player) == 0 or player['hp'] <= 0:
 				continue			
 			
 			enemies = goblins
@@ -111,285 +72,164 @@ class Solution(object):
 			if player['side'] == 'G':
 				enemies = elves
 				enemiesSym = 'E'
-				goblins.remove(t)
-			else:
-				elves.remove(t)
-				#for r in player['distances']:
-				#	print(r)
+
+			self.setPlayerDistances(rows, player)
 			
-			closest, distance = self.findClosestEnemies((player['x'], player['y']), player['distances'], enemies, allPlayers, rows)
-			
+			closest, distance = self.findCorrectPath(rows, (player['x'], player['y']), player['distances'], player['closest'], player['dist'])
+
 			if closest != None:
 				#if closest isn't in range, move
-				if distance > 0:
+				if distance is not None and distance > 0:
 					rows[player['y']][player['x']] = '.'
 					player['x'] = closest[0]
 					player['y'] = closest[1]
 					rows[player['y']][player['x']] = player['side']
-					change = True
 					
-				# @TODO Fix target selection!
-				#attack!
+
 				target = None
-				#top
-				lowestHP = 200
-				enemies = list(enemies)
-				enemies.sort()
-				enemies.reverse()				
+				lowestHP = 201
 				
-				for e in enemies:
-					ene = allPlayers[e]
-					#bottom
-					if player['y'] + 1 == ene['y'] and player['x'] == ene['x'] and ene['hp'] <= lowestHP:
-						target = '%s,%s' % ('{0:03d}'.format(player['y']+1),'{0:03d}'.format(player['x']))
-						lowestHP = ene['hp']
+				enemies.sort(key=lambda x: (x['y'], x['x']), reverse=True)
+				
+				#bottom, right, left, top (reverse)
+				#coords = [(player['x'],player['y'] + 1),(player['x']+1,player['y']),(player['x']-1,player['y']), (player['x'],player['y']-1)]
+				coords = [(player['x'],player['y'] - 1),(player['x']-1,player['y']),(player['x']+1,player['y']), (player['x'],player['y']+1)]
+				#coords = [(player['x'],player['y'] - 1),(player['x'],player['y']+1),(player['x']-1,player['y']), (player['x']+1,player['y'])]
+				#coords = [(player['x']+1,player['y']),(player['x']-1,player['y']),(player['x'],player['y']+1), (player['x'],player['y']-1)]
+				possibles = []
 					
-					#right
-					if player['x'] + 1 == ene['x'] and player['y'] == ene['y'] and ene['hp'] <= lowestHP:
-						target = '%s,%s' % ('{0:03d}'.format(player['y']),'{0:03d}'.format(player['x'] + 1))
-						lowestHP = ene['hp']
-						
-					#left
-					if player['x'] - 1 == ene['x'] and player['y'] == ene['y'] and ene['hp'] <= lowestHP:
-						target = '%s,%s' % ('{0:03d}'.format(player['y']),'{0:03d}'.format(player['x']-1))
-						lowestHP = ene['hp']
-						
-					if player['y'] - 1 == ene['y'] and player['x'] == ene['x'] and ene['hp'] <= lowestHP:
-						target = '%s,%s' % ('{0:03d}'.format(player['y']-1),'{0:03d}'.format(player['x']))
-						lowestHP = ene['hp']
-
-
-
+				for c in coords:
+					match = None
+					for ene in enemies:
+						if c == (ene['x'], ene['y']):
+							match = ene
+							break
+					possibles.append(match)
+				
+				for p in possibles:
+					if p is not None and p['hp'] < lowestHP and p['hp'] > 0:
+						target = p
+						lowestHP = p['hp']
 				
 				if target:
 					if player['side'] == 'E':
-						allPlayers[target]['hp'] -= attackPower
+						target['hp'] -= attackPower
 					else:
-						allPlayers[target]['hp'] -= 3
-					
-					if allPlayers[target]['hp'] <= 0:
-						rows[allPlayers[target]['y']][allPlayers[target]['x']] = '.'
+						target['hp'] -= 3
+						
+					if target['hp'] <= 0:
+						rows[target['y']][target['x']] = '.'
 						enemies.remove(target)
-						del(allPlayers[target])
-						if player['side'] == 'G':
-							elves.remove(target)
-						else:
-							goblins.remove(target)
-						change = True
-						if target in turns:
-							turns[turns.index(target)] = None
-							
-			
-			#update sets	
-			newName = '%s,%s' % ('{0:03d}'.format(player['y']),'{0:03d}'.format(player['x']))
-			allPlayers[newName] = player
-			
-			if player['side'] == 'G':
-				goblins.add(newName)
-			else:
-				elves.add(newName)
+
+			heapq.heappush(newPlayerList, (player['y'],player['x'],count,player))
 			
 			
 			if len(goblins) == 0 or len(elves) == 0:
 				break
-			
-			if change:
-				self.setMapDistances(rows, allPlayers)
-				
-	#def pickDirection(choices, distances):
+		
+		return newPlayerList
 		
 	
-	def findClosestEnemies(self, playerCoords, distances, enemies, players, rows):
+	def findCorrectPath(self, rows, playerCoords, distances, closest, distance):
 		obstacles = ['#', 'E', 'G', '.']
-		closest = None 
-		smallest = 100000
-		health = 200
-		
-		
-		enemies = list(enemies)
-		enemies.sort()
-		enemies.reverse()
-		
-		for e in enemies:
-			guy = players[e]
-			#guyShortest = 10000
-			coords = None
-			x = guy['x']
-			y = guy['y']
-			#distances = guy['distances']
-			
-			#find next too
-			guyClose = list()
-			if  playerCoords in ((x, y-1), (x-1, y), (x+1, y), (x, y+1)):
-				closest = playerCoords
-				smallest = 0
-				health = guy['hp']
-				continue
-			
-			#no need to go further if we already know someone is touching
-			if smallest == 0:
-				continue
-			
-			#bottom
-			if y + 1 <  len(rows) and (distances[y+1][x] not in obstacles) and distances[y+1][x] <= smallest:
-				smallest = distances[y+1][x]
-				closest = (x, y+1)				
-			#right
-			if x + 1 < len(rows[y]) and (distances[y][x+1] not in obstacles) and distances[y][x+1] <= smallest:
-				smallest = distances[y][x+1]
-				closest = (x+1, y)
-			#left
-			if x - 1 >= 0 and (distances[y][x-1] not in obstacles) and distances[y][x-1] <= smallest:
-				smallest = distances[y][x-1]
-				closest = (x-1, y)
-			#top
-			if y - 1 >= 0 and (distances[y-1][x] not in obstacles) and distances[y-1][x] <= smallest:
-				smallest = distances[y-1][x]
-				closest = (x, y-1)
 
 		if closest is None:
-			return (closest, smallest)		
+			return (closest, distance)		
 			
-			
-		#distance = smallest
-		while smallest > 1:
+		while distance > 1:
 			x = closest[0]
 			y = closest[1]
 			
-			if y + 1 <  len(rows) and (distances[y+1][x] not in obstacles) and distances[y+1][x] <= smallest:
-				smallest = distances[y+1][x]
-				closest = (x, y+1)				
-			#right
-			if x + 1 < len(rows[y]) and (distances[y][x+1] not in obstacles) and distances[y][x+1] <= smallest:
-				smallest = distances[y][x+1]
-				closest = (x+1, y)
-			#left
-			if x - 1 >= 0 and (distances[y][x-1] not in obstacles) and distances[y][x-1] <= smallest:
-				smallest = distances[y][x-1]
-				closest = (x-1, y)
-			#top
-			if y - 1 >= 0 and (distances[y-1][x] not in obstacles) and distances[y-1][x] <= smallest:
-				smallest = distances[y-1][x]
-				closest = (x, y-1)			
-			#we need to walk the path to find where our player should move
+			coords = [(x,y+1),(x+1,y),(x-1,y), (x,y-1)]
 			
+			for c in coords:
+				if c[1] <  len(rows) and (distances[c[1]][c[0]] not in obstacles) and distances[c[1]][c[0]] <= distance:
+					distance = distances[c[1]][c[0]]
+					closest = (c[0], c[1])				
 			
 		#check reading order of coords
 		x = playerCoords[0]
 		y = playerCoords[1]		
-		
-		#top	
-		#if y - 1 >= 0 and (distances[y-1][x] not in obstacles) and distances[y-1][x] == smallest:
-		#	smallest = distances[y-1][x]
-		#	closest = (x, y-1)
-		#left
-		#elif x - 1 >= 0 and (distances[y][x-1] not in obstacles) and distances[y][x-1] == smallest:
-		#	smallest = distances[y][x-1]
-		#	closest = (x-1, y)					
-		#right
-		#elif x + 1 < len(rows[y]) and (distances[y][x+1] not in obstacles) and distances[y][x+1] == smallest:
-		#	smallest = distances[y][x+1]
-		#	closest = (x+1, y)
-		#bottom
-		#	smallest = distances[y+1][x]
-		#	closest = (x, y+1)	
-
 	
 		
-		return (closest, smallest)
+		return (closest, distance)
 			
 						
 	
-	def pullOutPlayers(self, rows, goblins, elves, allPlayers):
+	def pullOutPlayers(self, rows, goblins, elves):
 		playerSymbols = ['G', 'E']
-	
+		allPlayers = []
 		for y, row in enumerate(rows):
 			for x, ele in enumerate(row):
 				if ele in playerSymbols:
+					player = { 'side': ele, 'hp': 200, 'x': x, 'y': y}
 					if ele == 'G':
-						goblins.add('%s,%s' % ('{0:03d}'.format(y),'{0:03d}'.format(x)))
+						goblins.append(player)
 					else:
-						elves.add('%s,%s' % ('{0:03d}'.format(y),'{0:03d}'.format(x)))
-						
-					allPlayers['%s,%s' % ('{0:03d}'.format(y),'{0:03d}'.format(x))] = { 'side': ele, 'hp': 200, 'x': x, 'y': y} 						
-					#rows[y][x] = '.'
+						elves.append(player)
+					
+					heapq.heappush(allPlayers, (y,x,0,player))
+					
+		return allPlayers
 			
-	def setMapDistances(self, rows, players):
-		for p in players:
-			firstEnemyDistance = {'distance': 10000}
+	def setPlayerDistances(self, rows, player):	
+		x = player['x']
+		y = player['y']
+		workingRows = copy.deepcopy(rows)
+		workingRows[y][x] = 0
+		badEle = 'G'
+		if player['side'] == 'G':
+			badEle = 'E'
 			
-			if len(players[p]) == 0:
+		closest = self.findPointDistances(x, y, workingRows, badEle)
+		player['distances'] = workingRows
+		player['closest'] = closest[0]
+		player['dist'] = closest[1]
+											
+	def findPointDistances(self, x, y, rows, badEle):
+		queue = deque();
+		queue.append((x,y));
+		obstacles = ['#', 'E', 'G']
+		rows[y][x] = 0
+		closest = 10000
+		closestCoords = (1000,1000)			
+		
+		while len(queue):
+			v = queue.popleft()
+			
+			if (rows[v[1]][v[0]] > closest):
 				continue
 			
-			x = players[p]['x']
-			y = players[p]['y']
-			workingRows = copy.deepcopy(rows)
-			workingRows[y][x] = 0
-			badEle = 'G'
-			if players[p]['side'] == 'G':
-				badEle = 'E'
+			coords = [(v[0]-1,v[1]),(v[0]+1,v[1]),(v[0],v[1]-1), (v[0], v[1]+1)]
+			badFound = False						
 				
-			self.findPointDistances(x, y, workingRows, badEle, firstEnemyDistance)
-			players[p]['distances'] = workingRows
-											
-	
-	def findPointDistances(self, x, y, rows, badEle, firstEnemyDistance):
-		distance = int(rows[y][x]) + 1
-		obstacles = ['#', 'E', 'G']
-		badEleFound = False
-		
-		if distance > firstEnemyDistance['distance']:
-			return
-		
-		# left
-		if x - 1 >= 0:
-			if rows[y][x-1] not in obstacles and (rows[y][x-1] == '.' or int(rows[y][x-1]) > distance):
-				rows[y][x-1] = distance
-				self.findPointDistances(x-1, y, rows, badEle, firstEnemyDistance)
-			elif rows[y][x-1] == badEle:
-				if distance < firstEnemyDistance['distance']:
-					firstEnemyDistance['distance'] = distance
-				else:
-					return
-		
-		#right	
-		if x + 1 < len(rows[y]):
-			if rows[y][x+1] not in obstacles and (rows[y][x+1] == '.' or rows[y][x+1] > distance):
-				rows[y][x+1] = distance
-				self.findPointDistances(x+1, y, rows, badEle, firstEnemyDistance)
-			elif rows[y][x+1] == badEle:
-				if distance < firstEnemyDistance['distance']:
-					firstEnemyDistance['distance'] = distance
-				else:
-					return				
+			for c in coords:
+				if rows[c[1]][c[0]] == badEle and rows[v[1]][v[0]] <= closest:
+					badFound = True
+					closest = rows[v[1]][v[0]]
+
+					if v[1] < closestCoords[1]:
+						closestCoords = v
+					elif v[1] == closestCoords[1] and v[0] < closestCoords[0]:
+						closestCoords = v
+					break
 				
-		#top	
-		if y >= 0:
-			if rows[y-1][x] not in obstacles and (rows[y-1][x] == '.' or rows[y-1][x] > distance):
-				rows[y-1][x] = distance
-				self.findPointDistances(x, y-1, rows, badEle, firstEnemyDistance)
-			elif rows[y-1][x]  == badEle:
-				if distance < firstEnemyDistance['distance']:
-					firstEnemyDistance['distance'] = distance
-				else:
-					return				
+				
+				if rows[c[1]][c[0]] not in obstacles and (rows[c[1]][c[0]] == '.' or rows[c[1]][c[0]] > rows[v[1]][v[0]] +1):
+					rows[c[1]][c[0]] = rows[v[1]][v[0]] + 1
+					queue.append(c)
+		
+
+		if closest == 10000:
+			closest = None
+			closestCoords = None
 			
-		#bottom
-		if y + 1 <  len(rows):
-			if rows[y+1][x] not in obstacles and (rows[y+1][x] == '.' or rows[y+1][x] > distance):
-				rows[y+1][x] = distance
-				self.findPointDistances(x, y+1, rows, badEle, firstEnemyDistance)	
-			elif rows[y+1][x] == badEle:
-				if distance < firstEnemyDistance['distance']:
-					firstEnemyDistance['distance'] = distance
-				else:
-					return					
+		return (closestCoords, closest)
 		
-		
-	#def buildClosestDistances(map):
+	
 
 	def run(self):
-		inputList = common.loadInput('input.txt', True) #True = split, False = string
+		inputList = common.loadInput('input.txt', True)
 		print('Advent Day: X')
 		self.solution(inputList)
 

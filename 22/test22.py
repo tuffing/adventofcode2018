@@ -2,7 +2,7 @@
 
 import unittest
 #replace standard with day name
-from sol22b import *
+from sol22 import *
 
 sys.path.append('../')
 import common
